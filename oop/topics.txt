@@ -1,0 +1,61 @@
+Here’s an ordered list of OOP concepts in Python, with a few additional ones that might be relevant for your study:
+
+Classes and Objects – Understanding the basic structure of OOP, how to define a class, and how objects are created from classes.
+
+Attributes and Methods – Learning about instance variables (attributes) and methods (functions) inside a class.
+
+Encapsulation – Focusing on the concept of hiding implementation details and exposing only necessary parts of the class using access modifiers (public, private).
+
+Static Methods and Class Methods – Understanding the difference between regular instance methods, static methods (which don't need an instance), and class methods (which operate on the class itself).
+
+Getters and Setters – Using functions to access or modify private attributes (can be implemented manually or via @property decorators).
+
+Abstraction – Hiding complex implementation and exposing only the necessary details through abstract classes or methods.
+
+Abstract Base Classes (ABC) – A way to define an interface for your classes. Abstract base classes allow you to define methods that must be implemented in subclasses, enforcing a consistent structure across multiple classes.
+
+Inheritance – Understanding how to inherit from parent classes, access inherited properties, and override methods.
+
+Polymorphism – Overriding methods in derived classes to give them different behaviors.
+
+Dunder Methods (Magic Methods) – Special methods like __init__, __str__, __repr__, __add__, etc., to define object behavior for built-in operations.
+
+Operator Overloading – Defining custom behavior for operators (e.g., +, -, ==) when applied to objects.
+
+Python’s descriptor protocol
+
+Decorator Class – Using classes as decorators, which are useful for modifying or extending the behavior of functions or methods.
+
+Data Classes – Using the dataclasses module to simplify class definitions with automatic generation of common special methods like __init__, __repr__, etc.
+
+Multiple Inheritance and Method Resolution Order (MRO) – Understanding how Python resolves conflicts in multiple inheritance scenarios.
+
+Composition over Inheritance – Learning about creating complex types by combining objects rather than inheriting from them
+
+
+
+## Advances
+
+Mixins – A class designed to provide functionality to other classes through inheritance, but not intended to stand on its own. Mixins are often used in frameworks and libraries to extend the functionality of classes without needing to subclass directly.
+
+Duck Typing – A concept in Python (and dynamic languages) where an object’s suitability for use is determined by its behavior (methods and attributes) rather than its class or type. This means that if an object behaves like a certain type, it can be treated as that type.
+
+Design Patterns (e.g., Singleton, Factory, Observer) – Common solutions to recurring problems in software design. These patterns help you structure your code more effectively and efficiently.
+
+SOLID Principles – A set of principles to improve object-oriented design and ensure that your code is easy to maintain and extend. The SOLID principles are:
+
+S: Single Responsibility Principle
+O: Open/Closed Principle
+L: Liskov Substitution Principle
+I: Interface Segregation Principle
+D: Dependency Inversion Principle
+
+Dependency Injection – A design pattern that helps to decouple classes by injecting dependencies (like services or other objects) into classes rather than having the classes create their own dependencies.
+
+Event-Driven Programming and Observer Pattern – A method of programming where an object (the observer) listens for events (changes in state) in another object (the subject). This pattern is useful in applications with user interfaces or systems that require asynchronous communication.
+
+State Design Pattern – A pattern that allows an object to change its behavior when its internal state changes. This is useful for managing complex state transitions within an object.
+
+Iterator Pattern – A pattern that allows sequential access to elements in a collection without exposing the underlying implementation.
+
+Composite Pattern – A pattern where individual objects and collections of objects are treated uniformly. This is often used to represent tree-like structures.
