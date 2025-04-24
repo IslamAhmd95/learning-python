@@ -16,12 +16,22 @@ tf = open('text.txt', 'xt')
 bf = open('binary.txt', 'xb')
 """
 
-# f = open('names.txt')
+# f = open('names_list.txt')
+# print(f.mode) # check the mode of the file
 # print(f.read()) # read all file content
 # print(f.read(4)) # read 4 characters
 
+# print(f.readlines()) # read all lines and return a list of lines
+
 # print(f.readline()) # read first line, the newline character (\n) at the end of the line is part of the string returned by readline() "line1\n"
+
 # print(f.readline()) # read second line "line2\n"
+
+# f.seek(0)  # reset pointer to beginning of the file, i have to do this to read the file again otherwise the next print will not print anything
+
+# print([line.strip() for line in f.readlines()]) # read all lines and remove the new line character (\n) at the end of each line
+
+#-------------------------------------------------------------
 
 # Removing the line with 2 ways
 
@@ -29,12 +39,12 @@ bf = open('binary.txt', 'xb')
 # print(f.readline(), end='') # Removes the extra newline from print
 
 # for line in f:
-#     print(line)
+#     print(line, end='')
 
 # f.close() # always remember to close the file
 
 
-# using try/except with file opening is the best practice to make sure you closed the file in the finally statement
+# using try/except with file opening is a more better way to make sure you closed the file in the finally statement
 # try:
 #     # f = open('names_list.txt')
 #     f = open('names.txt')
@@ -62,6 +72,7 @@ bf = open('binary.txt', 'xb')
 # print(f.read())
 # f.close()
 
+#--------------------------------------------------------------
 
 ## 2 ways to create the file 
 
@@ -81,7 +92,7 @@ bf = open('binary.txt', 'xb')
 # except:
 #     print('File already exists')
 
-
+#--------------------------------------------------------------
 
 ## delete a file
 
@@ -102,16 +113,58 @@ bf = open('binary.txt', 'xb')
 # delete folder
 # os.rmdir('foldername')
 
+#--------------------------------------------------------------
 
-# let's use the with way with opening file bcause it closes the file automatically
+# using "with" statement is the best practice to open file, it closes it automatically
 
-# copying the more_files content to names_list file 
-with open("more_names.txt") as f:
-    content = f.read();
+# copying the names_list file content to more_names file 
 
-with open("names_list.txt", "w") as f:
-    f.write(content)
+with open("names_list.txt", "r") as rf:
+    with open("more_names.txt", "w") as wf:
+        rf_content = rf.read()
+        for line in rf_content:
+            wf.write(line)
 
+#-----------------------------------------------------------------------------
+
+"""
+This approach reads the file in chunks, not all at once.
+
+That means:
+
+    Efficient for large files — You don’t load the entire file into memory.
+
+    You control how much to read at a time (like buffering).
+
+    Useful for streaming, network transfers, or when processing a large file piece by piece.
+"""
+
+with open("names_list.txt") as f:
+    size_to_read = 7
+
+    f_content = f.read(size_to_read)
+    print(f.tell())  # ⬅️ Shows where the pointer is after reading 7 characters
+
+    while len(f_content) > 0:
+        print(f_content, end='')
+        f_content = f.read(size_to_read)
+
+    print("\n", f.tell())  # ⬅️ Shows the final position (i.e., end of the file)
+
+    f.seek(0)  # ⬅️ Reset pointer to start
+    print(f.tell())  # ⬅️ Should now print 0
+
+
+with open("jaguar.jpg", "rb") as rf:
+    with open("jaguar_copy.jpg", "wb") as wf:
+        chunk_size = 4096
+        rf_content = rf.read(chunk_size)
+
+        while len(rf_content) > 0:
+            wf.write(rf_content)
+            rf_content = rf.read(chunk_size)
+
+#------------------------------------------------------------------------------
 
 ## Notes
 
@@ -135,7 +188,7 @@ except Exception as e:
 try:
     f = open('context.txt');
     try:
-        f.write("Ahmed go to school") # file opened for read, add w to open it for writing
+        f.write("Ahmed goes to school") # file opened for read, add w to open it for writing
         print('text written')
     except Exception as e:
         print(f"Can't write to file because : {e}")

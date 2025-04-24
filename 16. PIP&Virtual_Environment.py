@@ -12,6 +12,20 @@ Steps to Use Virtual Environment:
 2. Activate the environment.
 3. Install dependencies locally for the project.
 
+
+What Does Activating a Virtual Environment Mean?
+	When you activate a virtual environment (venv), you are telling your terminal to use the Python and dependencies installed inside that environment instead of the system-wide Python installation.
+		Each virtual environment has its own isolated Python interpreter and installed packages.
+		When activated, commands like python and pip will refer to the versions inside .venv, not the system-wide ones.
+		This helps avoid conflicts between different projects with different dependencies.
+
+        
+What Happens When You Deactivate a Virtual Environment?
+	It restores your terminal to its normal state, using the system-wide Python installation instead of the one inside .venv.
+		The (.venv) prefix will disappear from your terminal.
+		Any Python commands (python, pip, etc.) will now use the system-wide versions.
+
+    
 Commands:
 - Create a virtual environment:
   python -m venv <env_name>
