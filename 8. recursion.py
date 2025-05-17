@@ -15,8 +15,10 @@ print(newTotal)
     # If you’re calling a function just to perform an action (like printing or logging), and you don’t need any result from it.
 
 def calculate_factorial(num):
-    if num <= 1:
+    if num == 0 or num == 1:
         return 1
+    elif num < 0:
+        return "Factorial is not defined for negative numbers."
     else:
         return num * calculate_factorial(num - 1) # 5 * 4 * 3 * 2 * 1
     
