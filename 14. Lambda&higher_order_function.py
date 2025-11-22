@@ -328,7 +328,7 @@ print(result.strip())
 """
 reduce always needs an accumulator "acc" to track the intermediate results. The accumulator is either provided explicitly (through the initial argument) or implicitly starts as the first element of the iterable.
 
-Without an accumulator, reduce would not know how to combine the results across iterationsand will produce an error .
+Without an accumulator, reduce would not know how to combine the results across iterations and will produce an error .
 
 if the iterable is empty, there's no first element to use as the accumulator and no initial value, this leads to an error.
 

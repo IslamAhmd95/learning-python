@@ -1,6 +1,8 @@
 """
 Iterable vs. Iterator
 
+An iterable is like a book — you can read it.
+An iterator is like a bookmark — it keeps track of where you are as you read page by page.
 
 Analogy to Understand Iterables and Iterators
     Imagine you have a book (an iterable) that contains multiple pages.
@@ -342,3 +344,105 @@ print(next(iterator))  # Output: 10
 print(next(iterator))  # Output: 20
 print(next(iterator))  # Output: 30
 # print(next(iterator))  # Raises StopIteration
+
+
+#--------------------------------------------------------------------------------------------------
+
+
+"""
+What is itertools?
+    - Itertools is just a standard Python module.
+    - It gives you convenient, optimized tools to work with iterators and lazy evaluation.
+    - Itertools functions return iterators.
+    - not all itertools functions take iterators — some produce iterators!
+        - Think of itertools as a toolbox for iterators — its job is to either:
+            - Produce iterators (like count(), repeat(), etc.), or
+            - Work with existing iterables or iterators and return an iterator (like chain(), islice(), etc.)
+            - Remember that "All iterators are also iterables", but not all iterables are iterators.
+            - Iterators can’t be indexed.
+            - Almost all itertools functions work with both.
+
+
+"""
+import itertools
+
+
+# count(start=0, step=1): Infinite counter (like a generator that never ends)
+for i in itertools.count(5):  # starts from 5
+    if i > 10:
+        break
+    print(i, end="")   # 5 6 7 8 9 10
+
+
+counter = itertools.count(10)
+print(next(counter))  # 10
+print(next(counter))  # 11
+print(next(counter))  # 12
+
+
+# cycle(iterable): Repeats the items of an iterable forever
+counter = 1
+for item in itertools.cycle(['a', 'b', 'c']):
+    print(item, end="")   # A B C A B C
+    counter += 1
+    if counter == 6:
+        break
+
+
+# repeat(x, n): Repeats a value x for n times (or infinitely if n not passed)
+for item in itertools.repeat('hello', 3):
+    print(item, end="")  # hello hello hello
+
+
+# chain(iterable1, iterable2, ...)
+a = [1, 2, 3]
+b = ['a', 'b', 'c']
+for item in itertools.chain(a, b):
+    print(item, end="")   # 1 2 3 a  b c
+
+
+# combinations(iterable, r): Returns all combinations (no repeats) of r items
+for combo in itertools.combinations('ABC', 2):
+    print(combo, end="")   # ('A', 'B')  ('A', 'C')  ('B', 'C')
+
+
+# permutation(iterable, r): All order-sensitive arrangements of r items
+for perm in itertools.permutation('ABC', 2):
+    print(perm)
+
+"""
+Output:
+('A', 'B')
+('A', 'C')
+('B', 'A')
+('B', 'C')
+('C', 'A')
+('C', 'B')
+"""
+
+
+# groupby(iterable): Groups adjacent items by key (like SQL GROUP BY, but requires sorting first)
+data = 'aaabbcdd'
+for key, group in itertools.groupby(data):
+    print(f"{key}: {list(group)}")
+
+"""
+Output:
+a: ['a', 'a', 'a']
+b: ['b', 'b']
+c: ['c']
+d: ['d', 'd']
+"""
+
+
+# islice(iterable, start, stop, step): Slicing like a list, but works on any iterator
+gen = (x for x in range(100))  # generator
+for x in itertools.islice(gen, 10, 20, 2):
+    print(x, end="")  # 10 12 14 16 18
+
+
+# tee(iterator, n): Creates independent copies of an iterator
+gen = (x for x in range(3))
+a, b = itertools.tee(gen, 2)
+print(list(a))  # [0, 1, 2]
+print(list(b))  # [0, 1, 2]

@@ -67,7 +67,7 @@ Handling Advanced Cases with field
 @dataclass
 class Student:
     name : str
-    grades : list = field(default_factory=list)  # # Creates a new list for each student
+    grades : list = field(default_factory=list)  # Creates a new list for each student
 
 s1 = Student("Alice")
 s2 = Student("Bob")

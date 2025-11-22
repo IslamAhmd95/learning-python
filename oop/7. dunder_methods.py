@@ -1,6 +1,12 @@
 """
 Dunder methods (short for Double UNDERscore), also called magic methods or special methods, are predefined methods in Python with double underscores at the beginning and end of their names, like __init__, __str__, and __add__. These methods allow customization of how objects behave with built-in operations and functions.
 
+Operator overloading in Python allows you to redefine the behavior of standard operators (like +, -, *, ==, etc.) for user-defined classes. This means you can customize how these operators interact with objects of your custom classes, making your code more intuitive and readable.
+How it Works:
+    Python achieves operator overloading through "magic methods" or "dunder methods" (methods with double underscores before and after their names, e.g., __add__, __sub__). When an operator is used with objects of a class, Python internally calls the corresponding magic method defined within that class.
+Example:
+    To overload the + operator for a custom class, you would implement the __add__ magic method.
+
 Key Features
     Customization: Dunder methods let you define custom behavior for operators (+, -, *) and built-in functions (len(), str()).
     Object Representation: Methods like __str__ and __repr__ define how objects are displayed.
@@ -253,6 +259,7 @@ Recap:
         If you do define __del__, it is called before the object is deleted from memory. This allows you to add custom cleanup actions (e.g., printing a message, closing files, etc.).
     Behavior of __del__:
         When __del__ is defined, it executes before the object is deallocated but does not itself delete the object. The actual memory cleanup is still handled by the garbage collector.
+        So if you saw __del__’s message right after deleting a variable, that means it was the last reference.
 """
 # Example:
 import gc

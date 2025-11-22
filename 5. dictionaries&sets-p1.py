@@ -122,7 +122,7 @@ for key in member1:
 
 """
 Sets are unordered - items stored in a set are not kept in a particular order
-Sets are unidexed - we can't access set items by index
+Sets are unindexed - we can't access set items by index
 Set items are unique - duplicated items are not allowed
 Sets are changeable (mutable) - they can be changed, shrinked or growed on demand
 The set itself is mutable, but it can't contain mutable items like lists or dictionaries but can contain immutable items like numbers, strings or tuples

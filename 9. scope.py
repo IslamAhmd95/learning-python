@@ -13,7 +13,7 @@ def another():
     greeting("Islam")  # call the nested function
 
 another()
-
+print(count)  # 2
 
 # 1. global Keyword
 # The global keyword is used to access or modify variables declared in the global scope from within a function. Without global, a variable assignment inside a function creates a new local variable, even if a variable with the same name exists in the global scope.

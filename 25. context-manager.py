@@ -136,16 +136,16 @@ The code after yield is executed when exiting the with block (cleanup).
 @contextmanager
 def open_resource():
     print("Opening resource.")
-    yield "Resource"  # This is what will be returned to the `with` block
+    yield  # This is what will be returned to the `with` block
     print("Closing resource.")
 
 with open_resource() as resource:  # resource is the returned value from yield statement
-    print(resource)
+    print("Doing our logic")
 
 """
 output:
 Opening resource.
-Using: Resource
+Doing our logic
 Closing resource.
 """
 
@@ -222,7 +222,7 @@ def FileHandler(file_path, mode):
     file.close()
     print("file is closed")
 
-with FileHandler("test.txt", "w") as file:
+with FileHandler("test.txt", "w") as file:  # this context variable `file` is the value returned by yield
     print("start writing to file ...")
     file.write("Function as a context manager")
     print("finish writing to file")
@@ -285,7 +285,7 @@ __exit__() Method
 What is exc_value?
     exc_value usually holds the message inside the exception or the exception object itself. For example:
         raise ValueError("This is an error message.")
-        exc_type = "This is an error message."
+        exc_value = "This is an error message."
 
 What is exc_type?
     exc_type tells you the type of the exception that occurred.
@@ -320,3 +320,47 @@ What does "suppress the exception" mean?
 What does "exception propagates 'ينشر' " mean?
     "Exception propagates" means the error is not suppressed. Instead, the error continues to be raised, and the program will stop unless you handle the error outside the with block.
 """
+
+
+
+#----------------------------------------------------------------------------
+
+
+import time
+
+
+class Timer:
+
+    def __init__(self):
+        self.start_time = 0
+        self.end_time = 0
+
+
+    def __enter__(self):
+        self.start_time = time.perf_counter()
+        print("Start class Timer")
+        
+
+    def __exit__(self, exc_type, exc_val, exc_):
+        self.end_time = time.perf_counter()
+        print(f"Exit class Timer, duration is {self.end_time - self.start_time:.2f}")
+
+
+with Timer():
+    time.sleep(3)
+    print("Sleeping for 3 seconds")
+
+print("_"*60)
+
+@contextmanager
+def timer():
+    start_time = time.perf_counter()
+    print("Start func timer")
+    yield
+    end_time = time.perf_counter()
+    print(f"Exit func timer, duration is {end_time - start_time:.2f}")
+
+
+with timer():
+    time.sleep(3)
+    print("Sleeping for 3 seconds")

@@ -617,3 +617,18 @@ for t in threads:
 
 print(counter)  # Output may be incorrect, e.g., 456789
 # Fix: Use a lock to ensure synchronization (as shown in the lock example).
+
+
+
+
+
+"""
+| Feature               | `asyncio` (Coroutines)                                             | `multithreading`                                                      |
+| --------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| **Concurrency Model** | Single-threaded, cooperative                                       | Multi-threaded, pre-emptive                                           |
+| **Use Case**          | Lightweight I/O-bound tasks (e.g. HTTP calls, file read, DB query) | I/O-bound tasks (more complex) or where libraries are not async-aware |
+| **Performance**       | Very fast and memory-efficient                                     | More overhead due to multiple threads                                 |
+| **Context Switching** | Controlled by `await` (explicit)                                   | Managed by OS (can switch at any time)                                |
+| **Scalability**       | Can scale thousands of coroutines                                  | Usually limited by thread pool / GIL                                  |
+| **Best for**          | Many small async tasks (e.g. crawlers, APIs, bots)                 | I/O operations with blocking libraries (e.g. requests, Selenium)      |
+"""

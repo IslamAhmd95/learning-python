@@ -384,7 +384,7 @@ for num in squareGen(3):
     print(num)  # 0 1 4
 
 
-# Infine Generator for printing numbers
+# define Generator for printing numbers
 def printNumbers():
     num = 0
     while True:

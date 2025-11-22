@@ -44,6 +44,7 @@ This is a core feature of Python and allows for flexible and dynamic programming
 
 
 Key Features of First-Class Functions:
+
 1- Assignment: Functions can be assigned to variables.
 2- Passing: Functions can be passed as arguments to other functions.
 3- Returning: Functions can be returned from other functions.
@@ -102,7 +103,37 @@ Why is this important?
 
 The ability to treat functions as first-class citizens gives Python a great deal of flexibility and expressiveness. Some common use cases include:
 
-Higher-order functions: Functions that take other functions as arguments or return them.
-Callbacks: Passing a function to another function to be executed later.
-Functional programming techniques: Such as map, filter, and reduce.
+- Higher-order functions: Functions that take other functions as arguments or return them.
+- Functional programming techniques: Such as map, filter, and reduce.
+
+What is "Functional Programming"?
+
+    Functional programming is a programming style that focuses on:
+        - Writing pure functions (no side effects)
+        - Using functions as values (you can pass them, return them, etc.)
+        - Emphasizing data transformation over changing data in place
+    It’s different from the imperative style, which uses loops and variables to modify state step by step.
+
+- Imperative style is the tradition way 
+    EX:
+        numbers = [1, 2, 3, 4]
+        result = []
+        for n in numbers:
+            result.append(n * 2)
+        print(result)  # [2, 4, 6, 8]
+
+        
+- Callbacks: Passing a function to another function to be executed later.
+
 """
+
+
+people = ["Alice", "bob", "Charlie"]
+sorted_list = sorted(people, key=str.lower)  
+print(sorted_list)   # ['Alice', 'bob', 'Charlie']
+
+# Uppercase letters (like 'A') come before lowercase (like 'b').
+# But here you're passing key=str.lower as a callback, which means: "Before comparing items, convert them to lowercase."
+# The key argument is used to transform each item before sorting.
+# str.lower → pass the function itself not calling it.
+# str.lower() → would raise an error (you can't call lower() on the class itself).

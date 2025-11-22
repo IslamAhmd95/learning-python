@@ -1,6 +1,6 @@
 """
 What is an Enum?
-An Enum (short for enumeration) is a class in Python that is used to define a set of constant values, often representing options or categories. It provides a way to group related values together with names instead of using raw values like integers or strings directly.
+An Enum (short for enumeration) is a special class that inherits from enum.Enum in Python, it is used to define a set of constant values, often representing options or categories. It provides a way to group related values together with names instead of using raw values like integers or strings directly.
 
 In Python, enums are part of the enum module, introduced in Python 3.4.
 

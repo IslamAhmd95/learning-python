@@ -1,11 +1,7 @@
-# A closure is when a function remembers the variables from the place where it was created, even after that place (the outer function) is finished.
+# A closure is an inner function that remembers the variables from the enclosing (outer) function's scope, even after the outer function has finished execution.
 # This means the inner function can use values from the outer function, even when the outer function is no longer running.
 
-# def defList(*numbers):
-#     print(type(list(numbers)), list(numbers))
 
-# defList(1, 2, 3)
-# exit()
 def outer_function(value):
     def inner_function(inner_value):
         print("the inner value is: {inner_value}, the outer value is: {value}".format(inner_value=inner_value, value=value))
@@ -183,7 +179,7 @@ def math_oper(operation_type):
             return
         
         # operation_type.__name__ to get the name of the function
-        operation_name = getattr(operation_type, __name__, 'Unknown operation')
+        operation_name = getattr(operation_type, '__name__', 'Unknown operation')
         # there are situations where the function passed as an argument might not have a __name__ attribute, and this typically occurs when you're working with anonymous functions, such as those created using lambda.
         print(f"This is {operation_name} operation and it's result is {operation_type(*numbers)}")
 
@@ -203,3 +199,66 @@ math_operation(1, 2, 3) # 1 + 2 + 3 = 6, the arguments here should be separated 
 
 math_operation = math_oper(multiply)
 math_operation(1, 2, 3, 4) # 1 * 2 * 3 * 4 = 6, the arguments here should be separated not a tuple as we deal with it inside the function
+
+
+
+# Example:
+def generate_running_total(start, end, accumulated=0):
+    """
+    A recursive generator that yields a running total by adding
+    numbers from 'start' to 'end' (inclusive), one at a time.
+
+    This demonstrates lazy evaluation with 'yield' and recursion with 'yield from'.
+    """
+    if start <= end:
+        accumulated += start
+        yield accumulated  # Yield the new total (lazy one at a time)
+        start += 1
+    else:
+        return  # Base case: stop recursion when start > end
+
+    # Delegate the rest of the values to the next recursive call
+    yield from generate_running_total(start, end, accumulated)
+    """
+    user calls → get_total(5)
+    ├─ yields 5
+    ├─ yield from get_total(6)
+            ├─ yields 11
+            ├─ yield from get_total(7)
+                ├─ yields 18
+    """
+
+
+# Example usage
+for total in generate_running_total(5, 20):
+    print(total)
+
+
+
+
+
+# Example
+def make_counter(start):
+    """
+    Returns a closure that remembers and updates 'start' 
+    across multiple calls using the 'nonlocal' keyword.
+
+    Demonstrates closures and persistent state between function calls.
+    """
+    def counter(end):
+        # nonlocal start allows counter() to remember and update start from the outer scope.
+        nonlocal start  # Use the 'start' from the enclosing function
+        while start <= end:
+            print(start)
+            start += 1  # Updates outer 'start', so it retains state
+    return counter
+
+
+# Create a counter starting from 0
+count_up = make_counter(0)  # make_counter() returns a stateful function that keeps counting from where it left off.
+
+# First call: prints 0 to 5
+count_up(5)
+
+# Second call: continues from 6 to 10
+count_up(10)
